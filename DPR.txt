@@ -1,0 +1,119 @@
+#  --------->  Detailed project Report     <-----
+1. dump the data into mongodb database
+2. create the project structure by the template.py file script
+
+#main.py
+this file will responsible to collaborate all the files. there is some code are comment out.
+because we have testing some features of this project. and after testing successfully. i comment out those code.
+if you want test again you can execute all those code which i have comment out.
+
+#SETUP.PY
+1 -e .   <-- this will indicate setup.py file. and "-e" means editable mode and "." means current working directory.
+2. find_packages()   <-- this will fetch all the package from your project.
+		in which "__init__py" file is existed. which will be considered as a package of this project.
+3.pip install -r requirements.txt   <-- to install all dependency, and when you will install dependencies.
+		this file will indicate the setup.py file, bcz there is "-e ." indicator is mentioned.
+		after install the dependencies. one extra directory will initialized with in your current working directory
+		" insurance.egg-info " it has other all files which will contain the metadata of our project. and it will be ignore by git by defualt. 
+required libraries in this file  -->  setup from setuptools and typing
+
+4. don,t execute the setup.py file because it will autometically indicate by "-e ." from requirements.txt
+
+#logger
+
+1. importing method of logger file is different because it is written in __init__.py file.
+
+#Exception
+
+1. writt a static function to get clear cut idea of error.
+2. call the function inside the constructur.
+3. made a subchild class of Exception.
+
+# _pycache_/__init__.cpython-310.pvc
+
+both files are cache files which will be created by defualt. when we will import some code from
+the someone file. then it will create by defualt this _pycache_ file.
+so don,t confuse this file. it is unwanted file. which will create by default by the system.
+and it will  contain metadata of the file
+
+# .env
+in this file we will define all the custome Environment variable. so that 
+we can easily access all those variable. very easily.
+and by this file we will get some flexibility for our variable. for e.g if we will have need any
+path which will be frequently can be change in future. so without going in the code we will difine this
+path in the .env file. because if we will have need to change the path of this family, we will
+change in the .env file. it will update the path in the entire project. bcz it is custome variable.
+
+# insurance/utils.py
+in this file we will define all the function to get the output data.
+1. first i write the function to get the data from the mongodb
+
+# insurance/config.py
+
+this is configuration file. in which we will configre our all object.
+for e.g to use the mongodb database.we will have to configure our mongoclient.
+so mongoclient configuration will be define in this file. then we can esily use the 
+mongoclient from anywhere in the project.
+1. config the mongoclient 
+
+# insurance_logs
+ in this directory we will store all the logs file. to trace the execution of our project.
+ 
+ # dotenv libraries
+ it is used for to load the custome variable form the .env file.
+
+ # dataclasses libraries
+ it is just like class decorator. which provide some facility to our class.
+ it has some additional functionality. if we will use this class decorator. then we dont need
+ specify any constructur because it will initialized internally constructur and other many
+ more things. we can directly define the instance variable. just only specify the variable name and datatype.
+
+ #.github\workflows\.main.yaml
+ in this file we will write code for github action. to automate the developer  contribution event and
+ event, issue event. PR Event. and many more event you can configure
+ # artifact.py
+ it is resposible to generate output and save into the artifact_dir
+
+ # config_entity.py
+ in this file we will config of all the artifact.
+
+ # dataingestion
+ split the data into train,test,validation data.
+
+ # datavalidation
+ when we will load our data. we will validate the data. by the datavalidation.py file.
+ once the data successfully validated. then further pipeline will proceed. otherwise it will raise
+ error.
+
+
+
+ # DataTransformation
+-----> operation will be perform in this file
+1.handling missing value
+2.handling outliers
+3. feature transformation
+4. imbalance data handling
+
+# predictor.py , model_evaluation 
+in this file i has write code for the future training, so that when we will 
+again trained our model. if model accuracy is good our to the previous, then we will 
+take that model for the production Environment.
+and remember there is defined one conditon. and according to my condition
+if the model accuracy is good not to our previous then no infomation of that model
+well be keep. and if the accuracy is high to the information. then keep the model in the
+production and save all the information about my model in the save_model directory.
+this will keep all the iformation from our model.
+so that we can evaluate our new model to the previous model.
+
+#predict.py
+when you will run this file it has a single function which are calling inside this file
+in which you will have to pass the single parameter which is
+database = bool. if you will select True then this function will load the data from the mongodb.
+and fetch the 500 random sample from the available dataset do the batch prediction.
+and if you will choose the False then it will give the batch prediction from your defualt dataset which are
+available in your current working directories. e.g insorance.csv file
+
+function of this file is define in the pipeline/batch_prediction.py file.
+and give the batch prediction it will save the prediction with your input in the form of 
+.csv file in the prediction directory with timestamp name convention. so that we 
+can easily determine when we was did this prediction.
